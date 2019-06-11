@@ -1,0 +1,15 @@
+.container-after-toolbar {
+    margin-top: 64px;
+}
+
+.toolbar_footer {
+    z-index: 10;
+}
+
+.max-height {
+    height: 100%;
+}
+
+.inherit-height {
+    height: inherit;
+}
