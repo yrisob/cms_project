@@ -1,0 +1,16 @@
+{
+    "name": "default",
+    "type": "mysql",
+    "host": "localhost",
+    "port": 3306,
+    "username": "root",
+    "password": "gfhjkm1986",
+    "database": "TESTDB",
+    "migrations": ["dist/migration/**/*.js"],
+    "cli": {
+        "migrationsDir": "migration",
+        "entitiesDir": "src/entity"
+    },
+    "entities": ["dist/src/entities/**.entity.js"],
+    "synchronize": false
+}

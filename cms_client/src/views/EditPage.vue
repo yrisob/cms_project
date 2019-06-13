@@ -1,6 +1,8 @@
 <template>
 <v-container white>
-  <vue-editor v-model="content" :editorToolbar="toolbarOptions" :editorOptions="editorSettings"></vue-editor>
+  <vue-editor v-model="content"
+              :editorToolbar="toolbarOptions"
+              :editorOptions="editorSettings"></vue-editor>
   <v-btn small v-on:click="saveData()">Сохранить</v-btn>
 </v-container>
 </template>
@@ -38,7 +40,7 @@ export default {
       [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
 
       [{ 'color': [] }, { 'background': [] }], // dropdown with defaults from theme
-      [{ 'font': [] }],
+      [{ 'font': ['Sans Serif', 'roboto', 'mirza', 'arial'] }],
       [{ 'align': [] }],
 
       ['clean'] // remove formatting button
@@ -47,6 +49,9 @@ export default {
   methods: {
     saveData: function () {
       console.log(this.content)
+    },
+    handleSavingContent: function (contentsToBeSaved) {
+      console.log(contentsToBeSaved)
     }
   }
 }

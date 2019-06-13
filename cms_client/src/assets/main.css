@@ -1,0 +1,53 @@
+.container-after-toolbar {
+    margin-top: 64px;
+}
+
+.toolbar_footer {
+    z-index: 10;
+}
+
+.max-height {
+    height: 100%;
+}
+
+.inherit-height {
+    height: inherit;
+}
+
+.ql-picker-item span[data-value="Sans Serif"]::before {
+    font-family: "Sans Serif";
+}
+
+.ql-font span[data-value="Inconsolata"]::before {
+    font-family: "Inconsolata";
+}
+
+.ql-picker-item span[data-value="Roboto"]::before {
+    font-family: "Roboto";
+}
+
+.ql-picker-item span[data-value="Mirza"]::before {
+    font-family: "Mirza";
+}
+
+.ql-picker-item span[data-value="Arial"]::before {
+    font-family: "Arial";
+}
+
+/* Set content font-families */
+
+.ql-picker-item-inconsolata {
+    font-family: "Inconsolata";
+}
+
+.ql-picker-item-roboto {
+    font-family: "Roboto";
+}
+
+.ql-font-mirza {
+    font-family: "Mirza";
+}
+
+.ql-font-arial {
+    font-family: "Arial";
+}
