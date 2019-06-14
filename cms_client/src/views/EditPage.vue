@@ -1,10 +1,10 @@
 <template>
-<v-container white>
+<div>
   <vue-editor v-model="content"
               :editorToolbar="toolbarOptions"
               :editorOptions="editorSettings"></vue-editor>
   <v-btn small v-on:click="saveData()">Сохранить</v-btn>
-</v-container>
+</div>
 </template>
 
 <script>

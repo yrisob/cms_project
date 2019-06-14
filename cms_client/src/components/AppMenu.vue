@@ -7,71 +7,41 @@
       class="inherit-height"
     >
       <v-list class="container-after-toolbar">
-        <v-list-tile :to="homeLink">
-          <v-list-tile-action>
-            <v-icon >home</v-icon>
-          </v-list-tile-action>
-          <v-list-tile-title>Home</v-list-tile-title>
-        </v-list-tile>
+        <template v-for="(menuItem, index) in menuItems">
+          <v-list-tile v-if="menuItem.path" :to="menuItem.path" :key="index">
+            <v-list-tile-action>
+              <v-icon >{{menuItem.icon}}</v-icon>
+            </v-list-tile-action>
+            <v-list-tile-title>{{menuItem.name}}</v-list-tile-title>
+          </v-list-tile>
 
-         <v-list-tile :to="editpageLink">
-          <v-list-tile-action>
-            <v-icon >description</v-icon>
-          </v-list-tile-action>
-          <v-list-tile-title>Edit page</v-list-tile-title>
-        </v-list-tile>
-
-        <v-list-group
-          prepend-icon="account_circle"
-          value="true"
-        >
-          <template v-slot:activator>
-            <v-list-tile>
-              <v-list-tile-title>Users</v-list-tile-title>
-            </v-list-tile>
-          </template>
           <v-list-group
-            no-action
-            sub-group
-            value="true"
+           v-if="!(menuItem.path) && menuItem.items && (menuItem.items.length > 0)"
+           prepend-icon="archive"
+           value="t"
+          :key="index"
           >
             <template v-slot:activator>
-              <v-list-tile>
-                <v-list-tile-title>Admin</v-list-tile-title>
+              <v-list-tile :key="index">
+                <v-list-tile-title>{{menuItem.name}}</v-list-tile-title>
               </v-list-tile>
             </template>
 
             <v-list-tile
-              v-for="(admin, i) in admins"
+              v-for="(submenuItem, i) in menuItem.items"
               :key="i"
+              :to="submenuItem.path"
             >
-              <v-list-tile-title v-text="admin[0]"></v-list-tile-title>
-              <v-list-tile-action>
-                <v-icon v-text="admin[1]"></v-icon>
+              <v-list-tile-title><v-flex offset-lg3 offset-md3 offset-xs3>{{submenuItem.name}}</v-flex></v-list-tile-title>
+              <v-list-tile-action right>
+                <v-flex>
+                  <v-icon right v-text="submenuItem.icon"></v-icon>
+                </v-flex>
               </v-list-tile-action>
             </v-list-tile>
-          </v-list-group>
 
-          <v-list-group
-            sub-group
-            no-action
-          >
-            <template v-slot:activator>
-              <v-list-tile>
-                <v-list-tile-title>Actions</v-list-tile-title>
-              </v-list-tile>
-            </template>
-            <v-list-tile
-              v-for="(crud, i) in cruds"
-              :key="i"
-            >
-              <v-list-tile-title v-text="crud[0]"></v-list-tile-title>
-              <v-list-tile-action>
-                <v-icon v-text="crud[1]"></v-icon>
-              </v-list-tile-action>
-            </v-list-tile>
           </v-list-group>
-        </v-list-group>
+        </template>
       </v-list>
     </v-navigation-drawer>
 </template>
@@ -80,15 +50,21 @@
 export default {
   name: 'app-menu',
   data: () => ({
-    homeLink: '/',
-    editpageLink: '/editpage',
     admins: [
-      ['Management', 'people_outline'],
-      ['Settings', 'settings'] ],
-    cruds: [ ['Create', 'add'],
-      ['Read', 'insert_drive_file'],
-      ['Update', 'update'],
-      ['Delete', 'delete'] ]
+      ['Страницы', 'find_in_page'],
+      ['Меню', 'menu'],
+      ['Банеры', 'dashboard']],
+    menuItems: [
+      { name: 'Главная', icon: 'home', path: '/' },
+      { name: 'Пользователи', icon: 'account_circle', path: '/users' },
+      { name: 'Контент',
+        icon: 'archive',
+        items: [
+          { name: 'Страницы', icon: 'find_in_page', path: '/pages' },
+          { name: 'Меню', icon: 'menu', path: '/menu' },
+          { name: 'Банеры', icon: 'dashboard', path: '/banners' }
+        ] }
+    ]
   })
 }
 </script>
