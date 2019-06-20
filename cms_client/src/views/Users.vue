@@ -87,11 +87,16 @@ export default {
         this.isCreateUser = newValue
       }
     },
-    getSearchText () {
-      if (this.search) {
-        return '' + this.search
+    getSearchText: {
+      get () {
+        if (this.search) {
+          return '' + this.search
+        }
+        return ''
+      },
+      set (newValue) {
+        this.search = newValue
       }
-      return ''
     }
   },
   methods: {

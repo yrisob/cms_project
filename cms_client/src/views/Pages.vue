@@ -1,20 +1,22 @@
 <template>
-<div>
+  <div>
     <h1>Список страниц ресурса</h1>
-    <br>
+    <br />
     <table-with-search
-        :tableTitle="tableTitle"
-        :searchTitle="titleSearch"
-        :headers="headers"
-        :search="getSearchText"
-        :items="pages"
-        :actions="['delete', 'edit']"
-        :editHref="'/page'"
-        @deleteAction="deletePage"></table-with-search>
-    <br><br>
-    <v-btn  v-if="!createPage" @click="showCreatePage(true)" small>+ Добавить станицу</v-btn>
-
-</div>
+      :tableTitle="tableTitle"
+      :searchTitle="titleSearch"
+      :headers="headers"
+      :search="search"
+      :items="pages"
+      :actions="['delete', 'edit']"
+      :editHref="'/page'"
+      @deleteAction="deletePage"
+    ></table-with-search>
+    <br /><br />
+    <v-btn v-if="!createPage" @click="showCreatePage(true)" small
+      >+ Добавить станицу</v-btn
+    >
+  </div>
 </template>
 
 <script>
@@ -30,50 +32,43 @@ export default {
     tableTitle: 'Старницы ресурса',
     titleSearch: 'Найти страницу',
     createPage: false,
-    headers: [{
-      text: 'Название',
-      align: 'left',
-      sortable: false,
-      value: 'name'
-    },
-    {
-      text: 'Подпись',
-      align: 'right',
-      value: 'title'
-    },
-    {
-      text: 'Регистрация',
-      align: 'right',
-      value: 'createdDate'
-    },
-    {
-      text: 'Изменения',
-      align: 'right',
-      value: 'updatedDate'
-    },
-    {
-      text: 'Действия',
-      align: 'right',
-      action: true,
-      value: 'id'
-    }
+    headers: [
+      {
+        text: 'Название',
+        align: 'left',
+        sortable: false,
+        value: 'name'
+      },
+      {
+        text: 'Подпись',
+        align: 'right',
+        value: 'title'
+      },
+      {
+        text: 'Регистрация',
+        align: 'right',
+        value: 'createdDate'
+      },
+      {
+        text: 'Изменения',
+        align: 'right',
+        value: 'updatedDate'
+      },
+      {
+        text: 'Действия',
+        align: 'right',
+        action: true,
+        value: 'id'
+      }
     ]
   }),
   computed: {
     ...mapGetters({
       pages: 'getPages'
-    }),
-    getSearchText () {
-      if (this.search) {
-        return '' + this.search
-      }
-      return ''
-    }
+    })
   },
   methods: {
-    ...mapActions([
-      'deletePage'
-    ]),
+    ...mapActions(['deletePage']),
     showCreatePage (visualizate) {
       this.createPage = visualizate
     }

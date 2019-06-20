@@ -89,7 +89,6 @@
 
 <script>
 export default {
-  name: 'table-with-search',
   props: [
     'tableTitle',
     'searchTitle',
@@ -101,18 +100,20 @@ export default {
   ],
   data: () => ({
     searchingText: '',
+    isSearchTextChanged: false,
     dialog: false,
     idItemForDel: null
   }),
   computed: {
     searchingString: {
       get () {
-        if (!this.searchingText && this.search) {
-          return this.search
+        if (this.isSearchTextChanged) {
+          return this.searchingText
         }
-        return this.searchingText
+        return this.search
       },
       set (newValue) {
+        this.isSearchTextChanged = true
         this.searchingText = newValue
       }
     },
