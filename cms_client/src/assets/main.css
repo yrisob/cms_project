@@ -14,6 +14,10 @@
     height: inherit;
 }
 
+.v-btn__content .v-icon {
+    font-size: 16px;
+}
+
 .ql-picker-item span[data-value="Sans Serif"]::before {
     font-family: "Sans Serif";
 }

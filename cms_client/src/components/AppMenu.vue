@@ -65,6 +65,11 @@ export default {
           { name: 'Банеры', icon: 'dashboard', path: '/banners' }
         ] }
     ]
-  })
+  }),
+  computed: {
+
+  },
+  methods: {
+  }
 }
 </script>

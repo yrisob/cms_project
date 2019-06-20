@@ -8,10 +8,12 @@ import Menu from './views/Menu.vue'
 import Pages from './views/Pages.vue'
 import Banners from './views/Banners.vue'
 import Page from './views/Page.vue'
+import Login from './views/Login.vue'
+import store from './store.js'
 
 Vue.use(Router)
 
-export default new Router({
+const router = new Router({
   base: process.env.BASE_URL,
   routes: [{
     path: '/',
@@ -19,29 +21,55 @@ export default new Router({
     component: Home
   },
   {
+    path: '/login',
+    name: 'login',
+    component: Login,
+    props: route => ({
+      endpoint: route.query.endpoint
+    })
+  },
+  {
     path: '/about',
     name: 'about',
-    component: About
+    component: About,
+    meta: {
+      conditionalRoute: true
+    }
   },
   {
     path: '/editpage',
     name: 'editpage',
-    component: EditPage
+    component: EditPage,
+    meta: {
+      conditionalRoute: true
+    }
   },
   {
     path: '/pages',
     name: 'pages',
-    component: Pages
+    component: Pages,
+    meta: {
+      conditionalRoute: true
+    },
+    props: route => ({
+      search: route.query.search
+    })
   },
   {
     path: '/menu',
     name: 'menu',
-    component: Menu
+    component: Menu,
+    meta: {
+      conditionalRoute: true
+    }
   },
   {
     path: '/users',
     name: 'users',
     component: Users,
+    meta: {
+      conditionalRoute: true
+    },
     props: (router) => ({
       search: router.query.search
     })
@@ -49,11 +77,17 @@ export default new Router({
   {
     path: '/banners',
     name: 'banners',
-    component: Banners
+    component: Banners,
+    meta: {
+      conditionalRoute: true
+    }
   },
   {
     path: '/page/:id',
     component: Page,
+    meta: {
+      conditionalRoute: true
+    },
     props: (route) => ({
       id: route.params.id,
       query: route.query
@@ -61,3 +95,19 @@ export default new Router({
   }
   ]
 })
+
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.conditionalRoute)) {
+    if (store.getters.getAuthUser) {
+      next()
+    } else {
+      next({
+        path: `/login?endpoint=${to.path}`
+      })
+    }
+  } else {
+    next()
+  }
+})
+
+export default router
