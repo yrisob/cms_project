@@ -19,6 +19,7 @@
               :key="index"
               v-if="!header.action"
               :class="index ? 'text-xs-right' : ''"
+              @click="editItem(props.item)"
             >
               {{ props.item[header.value] }}
             </td>
@@ -145,6 +146,9 @@ export default {
         this.$emit('deleteAction', this.idItemForDel)
         this.dialog = false
       }
+    },
+    editItem (item) {
+      this.$emit('previewAction', item)
     }
   }
 }
