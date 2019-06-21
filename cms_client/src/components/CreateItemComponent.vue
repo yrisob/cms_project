@@ -8,9 +8,10 @@
           v-if="textField.type != 'password'"
           :key="index"
           v-model="textField.value"
-          v-validate="textFields.validateRule"
+          v-validate="textField.validateRule"
           :error-messages="errors.collect(textField.propName)"
-          data-vv-name="textField.propName"
+          v-bind:data-vv-name="textField.propName"
+          type="text"
           counter
           v-bind:label="textField.title"
         >
@@ -21,11 +22,12 @@
           :key="index"
           v-model="textField.value"
           data-vv-as="field"
-          v-validate="textFields.validateRule"
+          v-validate="textField.validateRule"
           :error-messages="errors.collect(textField.propName)"
+          :type="show ? 'text' : 'password'"
           counter
           v-bind:label="textField.title"
-          data-vv-name="textField.propName"
+          v-bind:data-vv-name="textField.propName"
           :append-icon="show ? 'visibility' : 'visibility_off'"
           @click:append="show = !show"
         ></v-text-field>
@@ -46,7 +48,7 @@ export default {
     show: false
   }),
   mounted () {
-    this.$validator.localize('ru', this.dictionary)
+    // this.$validator.localize('ru', this.dictionary)
   },
   methods: {
     cancel () {
@@ -62,7 +64,6 @@ export default {
       if (this.textFields && this.textFields.length > 0) {
         this.$validator.validateAll().then(response => {
           if (response) {
-            console.log(response)
             let item = {}
             for (let i = 0; i < this.textFields.length; i++) {
               item[this.textFields[i].propName] = this.textFields[i].value

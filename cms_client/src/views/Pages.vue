@@ -79,7 +79,7 @@ export default {
         propName: 'name',
         title: 'Название',
         value: '',
-        validateRule: { required: true, min: 3 }
+        validateRule: 'required|min:3'
       },
       {
         type: 'text',

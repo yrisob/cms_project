@@ -72,7 +72,7 @@ export default new Vuex.Store({
       state.users.splice(deletedIndex, 1)
     },
     addUser (state, user) {
-      let userId = state.users.sort((x, y) => x.id - y.id)[state.users.length - 1] + 1
+      let userId = state.users.sort((x, y) => x.id - y.id)[state.users.length - 1].id + 1
       user.id = userId
       user.createdDate = dayjs().format('DD.MM.YYYY HH:mm')
       user.updatedDate = dayjs().format('DD.MM.YYYY HH:mm')
@@ -83,7 +83,8 @@ export default new Vuex.Store({
       state.pages.splice(deletedIndex, 1)
     },
     addPage (state, page) {
-      let pageId = state.pages.sort((x, y) => x.id - y.id)[state.pages.length - 1] + 1
+      let pageId = state.pages.sort((x, y) => x.id - y.id)[state.pages.length - 1].id + 1
+      console.log(pageId)
       page.id = pageId
       page.createdDate = dayjs().format('DD.MM.YYYY HH:mm')
       page.updatedDate = dayjs().format('DD.MM.YYYY HH:mm')

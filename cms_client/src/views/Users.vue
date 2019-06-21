@@ -16,30 +16,33 @@
       <v-btn v-if="!createUser" @click="showCreateUserForm(true)" small
         >+ Добавить пользователя</v-btn
       >
-      <create-user
+      <create-item-component
         v-if="createUser"
+        :createItemTitle="createTitle"
+        :textFields="userFields"
         @visualize="createUser = $event"
-        @createUser="addUser"
-      ></create-user>
+        @create="addUser"
+      ></create-item-component>
     </div>
   </div>
 </template>
 
 <script>
 import TableWithSearch from '../components/TableWithSearch'
-import CreateUser from '../components/CreateUser'
+import CreateItemComponent from '../components/CreateItemComponent'
 import { mapGetters, mapActions } from 'vuex'
 
 export default {
   props: ['search'],
   components: {
     TableWithSearch,
-    CreateUser
+    CreateItemComponent
   },
   data: () => ({
     tableTitle: 'Пользователи',
     titleSearch: 'Поиск',
     isCreateUser: false,
+    createTitle: 'Создать пользователя',
     headers: [
       {
         text: 'Имя',
@@ -72,6 +75,36 @@ export default {
         align: 'right',
         action: true,
         value: 'id'
+      }
+    ],
+    userFields: [
+      {
+        type: 'text',
+        propName: 'name',
+        title: 'Имя',
+        value: '',
+        validateRule: 'required|min:3'
+      },
+      {
+        type: 'email',
+        propName: 'email',
+        value: '',
+        title: 'E-mail',
+        validateRule: 'required|email'
+      },
+      {
+        type: 'text',
+        propName: 'phone',
+        value: '',
+        title: 'Телефон',
+        validateRule: 'required|digits:11'
+      },
+      {
+        type: 'password',
+        propName: 'password',
+        value: '',
+        title: 'Пароль',
+        validateRule: 'required|min:8'
       }
     ]
   }),
