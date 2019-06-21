@@ -64,6 +64,9 @@ export default new Vuex.Store({
     },
     getPages: state => {
       return state.pages
+    },
+    getPage: state => id => {
+      return state.pages.find(pg => pg.id === +id)
     }
   },
   mutations: {
@@ -79,12 +82,11 @@ export default new Vuex.Store({
       state.users.push(user)
     },
     deletePage (state, id) {
-      let deletedIndex = state.pages.findIndex(page => page.id === id)
+      let deletedIndex = state.pages.findIndex(page => +page.id === +id)
       state.pages.splice(deletedIndex, 1)
     },
     addPage (state, page) {
       let pageId = state.pages.sort((x, y) => x.id - y.id)[state.pages.length - 1].id + 1
-      console.log(pageId)
       page.id = pageId
       page.createdDate = dayjs().format('DD.MM.YYYY HH:mm')
       page.updatedDate = dayjs().format('DD.MM.YYYY HH:mm')
@@ -105,7 +107,6 @@ export default new Vuex.Store({
     deletePage ({
       commit
     }, id) {
-      console.log(id)
       commit('deletePage', id)
     },
     addPage ({

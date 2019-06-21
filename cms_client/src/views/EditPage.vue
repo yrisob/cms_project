@@ -1,10 +1,12 @@
 <template>
-<div>
-  <vue-editor v-model="content"
-              :editorToolbar="toolbarOptions"
-              :editorOptions="editorSettings"></vue-editor>
-  <v-btn small v-on:click="saveData()">Сохранить</v-btn>
-</div>
+  <div>
+    <vue-editor
+      v-model="content"
+      :editorToolbar="toolbarOptions"
+      :editorOptions="editorSettings"
+    ></vue-editor>
+    <v-btn small v-on:click="saveData()">Сохранить</v-btn>
+  </div>
 </template>
 
 <script>
