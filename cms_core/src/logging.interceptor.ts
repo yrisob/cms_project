@@ -4,10 +4,7 @@ import { map, tap } from 'rxjs/operators';
 
 @Injectable()
 export class LoggingInterceptor implements NestInterceptor {
-  intercept(
-    context: ExecutionContext,
-    call$: Observable<any>,
-  ): Observable<any> {
+  intercept(context: ExecutionContext, call$: Observable<any>): Observable<any> {
     // tslint:disable-next-line:no-console
     const request = context.switchToHttp().getRequest() as Request;
     console.log(`Call method ${request.method}(${request.url}) with params `);

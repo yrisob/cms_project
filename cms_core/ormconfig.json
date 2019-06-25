@@ -1,16 +1,24 @@
 {
-    "name": "default",
     "type": "mysql",
     "host": "localhost",
     "port": 3306,
     "username": "root",
     "password": "gfhjkm1986",
-    "database": "TESTDB",
-    "migrations": ["dist/migration/**/*.js"],
+    "database": "cms_project",
+    "logging": false,
+    "entities": [
+        "src/entity/**/*.entity.ts"
+    ],
+    "migrations": [
+        "src/migration/**/*.ts"
+    ],
+    "subscribers": [
+        "src/subscriber/**/*.ts"
+    ],
     "cli": {
-        "migrationsDir": "migration",
-        "entitiesDir": "src/entity"
+        "entitiesDir": "src/entity",
+        "migrationsDir": "src/migration",
+        "subscribersDir": "src/subscriber"
     },
-    "entities": ["dist/src/entities/**.entity.js"],
     "synchronize": false
 }

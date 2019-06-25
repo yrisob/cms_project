@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { User } from '../entities/user.entity';
+import { User } from '../entity/user.entity';
 import { LoginRequest } from '../models/login-request';
 import { IUser } from '../models/interfaces/iuser.interface';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -7,9 +7,7 @@ import { Repository } from 'typeorm';
 
 @Injectable()
 export class UserService {
-  constructor(
-    @InjectRepository(User) private readonly userRepository: Repository<User>,
-  ) {}
+  constructor(@InjectRepository(User) private readonly userRepository: Repository<User>) {}
 
   async findAll() {
     return this.userRepository.find();
@@ -38,8 +36,6 @@ export class UserService {
       foundUser.password = updateData.password;
       foundUser.email = updateData.email;
       foundUser.phone = updateData.phone;
-      foundUser.confirmedEmail = updateData.confirmedEmail;
-      foundUser.confirmedPhone = updateData.confirmedPhone;
       await this.userRepository.save(foundUser);
     }
   }

@@ -3,7 +3,7 @@ import { UserService } from '../user/user.service';
 import { IUser } from '../models/interfaces/iuser.interface';
 import { RegistrationStatus } from '../models/interfaces/registration-status.interface';
 import * as jwt from 'jsonwebtoken';
-import { User } from '../entities/user.entity';
+import { User } from '../entity/user.entity';
 import { JwtPayload } from './interfaces/jwt.interface';
 import { Config } from '../config/config';
 
