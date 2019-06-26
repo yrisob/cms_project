@@ -1,15 +1,16 @@
 <template>
-     <v-toolbar fixed dark  class="toolbar_footer">
-      <!-- <v-toolbar-side-icon></v-toolbar-side-icon> -->
-      <v-toolbar-title>Title</v-toolbar-title>
-      <v-spacer></v-spacer>
-      <v-toolbar-items class="hidden-sm-and-down">
-         <v-btn flat @click="changeUser()">{{getChangeUserName}}</v-btn>
-      </v-toolbar-items>
-    </v-toolbar>
+  <v-toolbar fixed dark class="toolbar_footer">
+    <!-- <v-toolbar-side-icon></v-toolbar-side-icon> -->
+    <v-toolbar-title>Title</v-toolbar-title>
+    <v-spacer></v-spacer>
+    <v-toolbar-items class="hidden-sm-and-down">
+      <v-btn flat @click="changeUser()">{{ getChangeUserName }}</v-btn>
+    </v-toolbar-items>
+  </v-toolbar>
 </template>
 
 <script>
+
 export default {
   name: 'app-toolbar',
   computed: {
@@ -20,7 +21,7 @@ export default {
   methods: {
     changeUser () {
       if (this.$store.getters.getAuthUser) {
-        this.$store.state.authUser = null
+        this.$store.dispatch('logout')
         this.$router.push({ path: '/' })
       } else {
         this.$router.push({ path: '/login' })

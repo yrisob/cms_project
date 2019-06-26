@@ -6,8 +6,8 @@ export function validateClasses(dto: any, enterObject: any): any {
   const enterObjectKeys = Object.getOwnPropertyNames(enterObject);
   const resultKey = _.intersection(dtoKeys, enterObjectKeys);
 
-  for (let i = 0; i < resultKey.length; i++) {
-    dto[resultKey[i]] = enterObject[resultKey[i]];
+  for (const key of resultKey) {
+    dto[key] = enterObject[key];
   }
 
   const validator = new Validator();

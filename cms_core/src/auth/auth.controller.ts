@@ -4,7 +4,6 @@ import {
   UsePipes,
   Body,
   ValidationPipe,
-  UnauthorizedException,
   BadRequestException,
 } from '@nestjs/common';
 import { UserService } from '../user/user.service';
@@ -34,9 +33,7 @@ export class AuthController {
   public async login(@Body() login: LoginRequest) {
     return await this.usersService.getUserByLoginData(login).then(user => {
       if (!user) {
-        throw new BadRequestException(
-          'user with same login or password not found',
-        );
+        throw new BadRequestException('user with same login or password not found');
       } else {
         const token = this.authService.createToken(user);
         return {

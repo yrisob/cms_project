@@ -1,5 +1,5 @@
 <template>
-    <div>
+  <div>
     <h1>Войдите под своим логином</h1>
     <form>
       <v-text-field
@@ -10,23 +10,23 @@
         data-vv-name="email"
         required
       ></v-text-field>
-       <v-text-field
-              v-model="password"
-              :append-icon="show ? 'visibility' : 'visibility_off'"
-              :rules="[passwordRule.required, passwordRule.min]"
-              :type="show ? 'text' : 'password'"
-              name="input-10-1"
-              label="Пароль"
-              hint="At least 8 characters"
-              counter
-              @click:append="show = !show"
-              @keyup.enter="submit"
-            ></v-text-field>
+      <v-text-field
+        v-model="password"
+        :append-icon="show ? 'visibility' : 'visibility_off'"
+        :rules="[passwordRule.required, passwordRule.min]"
+        :type="show ? 'text' : 'password'"
+        name="input-10-1"
+        label="Пароль"
+        hint="At least 8 characters"
+        counter
+        @click:append="show = !show"
+        @keyup.enter="submit"
+      ></v-text-field>
 
       <v-btn @click="submit" dark>Войти</v-btn>
       <v-btn @click="clear">Очистить</v-btn>
     </form>
-    </div>
+  </div>
 </template>
 
 <script>
@@ -57,14 +57,12 @@ export default {
       this.$validator.validateAll().then(response => {
         if (response) {
           if (!this.$store.getters.getAuthUser) {
-            this.$store.state.authUser = '123'
+            this.$store.dispatch('login', '123')
             if (this.endpoint) {
               this.$router.push({ path: this.endpoint })
             } else {
               this.$router.push({ path: '/' })
             }
-          } else {
-            this.$store.state.authUser = undefined
           }
         }
       })
