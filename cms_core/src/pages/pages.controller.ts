@@ -7,6 +7,6 @@ import { AuthGuard } from '@nestjs/passport';
 @Controller('pages')
 export class PagesController extends CrudController(PagesService, 'page', PageDTO, {
   // createGuard: AuthGuard('jwt'),
-  updateGuard: AuthGuard('jwt'),
+  // updateGuard: AuthGuard('jwt'),
   deleteGuard: AuthGuard('jwt'),
 }) {}

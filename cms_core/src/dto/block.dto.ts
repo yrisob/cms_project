@@ -1,15 +1,15 @@
-import { IsInt, IsString } from 'class-validator';
+import { IsInt, IsString, IsNotEmpty } from 'class-validator';
 
 export class BlockDTO {
-  @IsInt()
-  id: number | undefined = undefined;
+  @IsString()
+  @IsNotEmpty()
+  name: string | undefined = null;
 
   @IsString()
   content: string | undefined = null;
 
-  @IsString()
   imgUrl: string | undefined = null;
 
   @IsInt()
-  index: number | undefined = null;
+  index: number = null;
 }
