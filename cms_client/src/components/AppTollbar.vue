@@ -15,13 +15,13 @@ export default {
   name: 'app-toolbar',
   computed: {
     getChangeUserName () {
-      return (this.$store.getters.getAuthUser) ? 'выйти' : 'войти'
+      return (this.$store.getters.GET_AUTH) ? 'выйти' : 'войти'
     }
   },
   methods: {
     changeUser () {
-      if (this.$store.getters.getAuthUser) {
-        this.$store.dispatch('logout')
+      if (this.$store.getters.GET_AUTH) {
+        this.$store.dispatch('LOGOUT')
         this.$router.push({ path: '/' })
       } else {
         this.$router.push({ path: '/login' })

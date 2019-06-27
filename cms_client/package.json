@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@appsflare/quill-image-resize-module": "^3.0.3",
+    "axios": "^0.19.0",
     "core-js": "^2.6.5",
     "dayjs": "^1.8.14",
     "quill-image-drop-module": "^1.0.3",

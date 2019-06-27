@@ -48,16 +48,22 @@ export default {
     this.$validator.localize('ru', this.dictionary)
   },
   methods: {
+    async validate () {
+      return this.$validator.validateAll()
+    },
     clear () {
       this.email = ''
       this.password = ''
       this.$validator.reset()
     },
-    submit () {
-      this.$validator.validateAll().then(response => {
-        if (response) {
-          if (!this.$store.getters.getAuthUser) {
-            this.$store.dispatch('login', '123')
+    async submit () {
+      const validator = await this.validate()
+      console.log(validator)
+      if (validator) {
+        if (!this.$store.getters.GET_AUTH) {
+          console.log('click button')
+          const success = await this.$store.dispatch('LOGIN', { email: this.email, password: this.password })
+          if (success) {
             if (this.endpoint) {
               this.$router.push({ path: this.endpoint })
             } else {
@@ -65,7 +71,7 @@ export default {
             }
           }
         }
-      })
+      }
     }
   }
 }

@@ -38,7 +38,7 @@ export class AuthController {
         const token = this.authService.createToken(user);
         return {
           success: true,
-          assecc_token: token,
+          token,
         };
       }
     });

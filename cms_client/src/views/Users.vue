@@ -9,7 +9,7 @@
       :search="getSearchText"
       :items="users"
       :actions="['delete']"
-      @deleteAction="deleteUser"
+      @deleteAction="DELETE_USER"
     ></table-with-search>
     <div>
       <br /><br />
@@ -21,7 +21,7 @@
         :createItemTitle="createTitle"
         :textFields="userFields"
         @visualize="createUser = $event"
-        @create="addUser"
+        @create="ADD_USER"
       ></create-item-component>
     </div>
   </div>
@@ -108,9 +108,12 @@ export default {
       }
     ]
   }),
+  mounted () {
+    this.$store.dispatch('GET_USERS')
+  },
   computed: {
     ...mapGetters({
-      users: 'getUsers'
+      users: 'USERS'
     }),
     createUser: {
       get () {
@@ -134,10 +137,9 @@ export default {
   },
   methods: {
     showCreateUserForm (event) {
-      console.log('addUser')
       this.isCreateUser = event
     },
-    ...mapActions(['deleteUser', 'addUser'])
+    ...mapActions(['DELETE_USER', 'ADD_USER'])
   }
 }
 </script>

@@ -2,13 +2,19 @@
   <div id="app">
     <v-app id="inspire" white>
       <app-toolbar></app-toolbar>
-      <v-layout class="container-after-toolbar"  grid-list-xl white>
+      <v-layout class="container-after-toolbar" grid-list-xl white>
         <v-layout row wrap white>
           <v-flex xs3 md3 lg3 class="max-height" v-if="showMenu">
-            <app-menu ></app-menu>
+            <app-menu></app-menu>
           </v-flex>
-          <v-flex xs8 md8 lg8 :class="(showMenu)? '': 'offset-xs2 offset-md2 offset-lg2'">
+          <v-flex
+            xs8
+            md8
+            lg8
+            :class="showMenu ? '' : 'offset-xs2 offset-md2 offset-lg2'"
+          >
             <v-container class="max-height">
+              <error-alert></error-alert>
               <router-view></router-view>
             </v-container>
           </v-flex>
@@ -22,6 +28,7 @@
 import AppFooter from './components/AppFooter'
 import AppMenu from './components/AppMenu'
 import AppToolbar from './components/AppTollbar'
+import ErrorAlert from './components/ErrorAlert'
 import './assets/main.css'
 
 export default {
@@ -29,7 +36,8 @@ export default {
   components: {
     AppFooter,
     AppMenu,
-    AppToolbar
+    AppToolbar,
+    ErrorAlert
   },
   data: () => ({
     links: [
@@ -43,7 +51,7 @@ export default {
   }),
   computed: {
     showMenu () {
-      return !!this.$store.getters.getAuthUser
+      return !!this.$store.getters.GET_AUTH
     }
   },
   methods: {

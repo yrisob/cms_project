@@ -51,6 +51,9 @@ export default {
     // this.$validator.localize('ru', this.dictionary)
   },
   methods: {
+    async validate () {
+      return this.$validator.validateAll()
+    },
     cancel () {
       if (this.textFields && this.textFields.length > 0) {
         this.textFields.forEach(element => {
@@ -60,18 +63,16 @@ export default {
         this.$emit('visualize', false)
       }
     },
-    save () {
+    async save () {
       if (this.textFields && this.textFields.length > 0) {
-        this.$validator.validateAll().then(response => {
-          if (response) {
-            let item = {}
-            for (let i = 0; i < this.textFields.length; i++) {
-              item[this.textFields[i].propName] = this.textFields[i].value
-            }
-            this.$emit('create', item)
-            this.cancel()
+        const validator = await this.validate()
+        if (validator) {
+          let item = {}
+          for (let i = 0; i < this.textFields.length; i++) {
+            item[this.textFields[i].propName] = this.textFields[i].value
           }
-        })
+          this.$emit('create', item)
+        }
       }
     }
   }

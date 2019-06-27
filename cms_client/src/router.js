@@ -98,7 +98,7 @@ const router = new Router({
 
 router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.conditionalRoute)) {
-    if (store.getters.getAuthUser) {
+    if (store.getters.GET_AUTH) {
       next()
     } else {
       next({
