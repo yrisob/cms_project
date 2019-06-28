@@ -1,4 +1,4 @@
-import { IsString, IsInt } from 'class-validator';
+import { IsString, IsUrl, IsEmpty } from 'class-validator';
 
 export class PageDTO {
   // @IsInt()
@@ -10,6 +10,5 @@ export class PageDTO {
   @IsString()
   title: string | undefined = undefined;
 
-  @IsString()
   titleImgUrl: string | undefined = undefined;
 }

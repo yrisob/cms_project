@@ -28,6 +28,17 @@ const apiCaller = {
       return instance.delete(`user/${id}`)
     }
   },
+  pages: {
+    all: () => {
+      return instance.get('page')
+    },
+    add: (data) => {
+      return instance.post('page', data)
+    },
+    delete: (id) => {
+      return instance.delete(`page/${id}`)
+    }
+  },
 
   setAuthorization: (token) => {
     instance.defaults.headers.common = {

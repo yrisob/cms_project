@@ -9,11 +9,12 @@ import { PagesService } from './pages/pages.service';
 import { BlocksController } from './blocks/blocks.controller';
 import { PagesController } from './pages/pages.controller';
 import { BlocksService } from './blocks/blocks.service';
+import { PageInfoService } from './page-info/page-info.service';
 
 @Module({
   imports: [AuthModule, UserModule, TypeOrmModule.forRoot()],
   controllers: [AppController, PagesController, BlocksController],
-  providers: [AppService, PagesService, BlocksService],
+  providers: [AppService, PagesService, BlocksService, PageInfoService],
 })
 export class AppModule {
   constructor(private readonly connection: Connection) {}

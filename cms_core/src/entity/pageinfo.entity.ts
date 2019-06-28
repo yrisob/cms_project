@@ -18,4 +18,12 @@ export class PageInfo extends VersionBase {
   @ManyToMany(type => Block)
   @JoinTable()
   blocks: Block[];
+
+  constructor() {
+    super();
+    this.page = new Page();
+    this.content = '';
+    this.index = 0;
+    this.blocks = undefined;
+  }
 }

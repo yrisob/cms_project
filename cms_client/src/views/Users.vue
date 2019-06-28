@@ -28,6 +28,7 @@
 </template>
 
 <script>
+import dayjs from 'dayjs'
 import TableWithSearch from '../components/TableWithSearch'
 import CreateItemComponent from '../components/CreateItemComponent'
 import { mapGetters, mapActions } from 'vuex'
@@ -63,12 +64,14 @@ export default {
       {
         text: 'Регистрация',
         align: 'right',
-        value: 'createdDate'
+        value: 'createdDate',
+        convert: (data) => dayjs(data).format('DD.MM.YYYY HH:mm')
       },
       {
         text: 'Изменения',
         align: 'right',
-        value: 'updatedDate'
+        value: 'updatedDate',
+        convert: (data) => dayjs(data).format('DD.MM.YYYY HH:mm')
       },
       {
         text: 'Действия',

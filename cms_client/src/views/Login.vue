@@ -58,10 +58,8 @@ export default {
     },
     async submit () {
       const validator = await this.validate()
-      console.log(validator)
       if (validator) {
         if (!this.$store.getters.GET_AUTH) {
-          console.log('click button')
           const success = await this.$store.dispatch('LOGIN', { email: this.email, password: this.password })
           if (success) {
             if (this.endpoint) {

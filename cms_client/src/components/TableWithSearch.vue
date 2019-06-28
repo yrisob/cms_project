@@ -21,7 +21,11 @@
               :class="index ? 'text-xs-right' : ''"
               @click="editItem(props.item)"
             >
-              {{ props.item[header.value] }}
+              {{
+                header.convert
+                  ? header.convert(props.item[header.value])
+                  : props.item[header.value]
+              }}
             </td>
             <td
               :key="index"

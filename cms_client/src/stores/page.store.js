@@ -1,61 +1,83 @@
-import dayjs from 'dayjs'
+import apiCaller from './api'
 
 const pageStore = {
   state: {
-    pages: [{
-      id: 1,
-      name: 'Главная',
-      title: 'Немного о компании ',
-      createdDate: '21.03.2019 12:13',
-      updatedDate: '23.03.2019 12:13'
-    },
-    {
-      id: 2,
-      name: 'Диллер онлайн',
-      title: 'Проекть NewDol',
-      createdDate: '21.03.2019 17:13',
-      updatedDate: '23.03.2019 20:13'
-    },
-    {
-      id: 5,
-      name: 'Первый интернет',
-      title: 'Проект «Первый интернет» для мобильного оператора',
-      createdDate: '21.03.2019 15:13',
-      updatedDate: '21.03.2019 14:43'
-    }
-    ]
+    pages: []
   },
   getters: {
-    getPages: state => {
+    PAGES: state => {
       return state.pages
     },
-    getPage: state => id => {
+    PAGE: state => id => {
       return state.pages.find(pg => pg.id === +id)
     }
   },
   mutations: {
-    deletePage (state, id) {
+    DELETE_PAGE: (state, id) => {
       let deletedIndex = state.pages.findIndex(page => +page.id === +id)
       state.pages.splice(deletedIndex, 1)
     },
-    addPage (state, page) {
-      let pageId = state.pages.sort((x, y) => x.id - y.id)[state.pages.length - 1].id + 1
-      page.id = pageId
-      page.createdDate = dayjs().format('DD.MM.YYYY HH:mm')
-      page.updatedDate = dayjs().format('DD.MM.YYYY HH:mm')
+    ADD_PAGE: (state, page) => {
       state.pages.push(page)
+    },
+    SET_PAGES: (state, pages) => {
+      state.pages = pages
     }
   },
   actions: {
-    deletePage ({
+    DELETE_PAGE: async ({
       commit
-    }, id) {
-      commit('deletePage', id)
+    }, id) => {
+      try {
+        const {
+          status
+        } = await apiCaller.pages.delete(id)
+        if (status === 200) {
+          commit('DELETE_PAGE', id)
+        }
+      } catch ({
+        response
+      }) {
+        commit('SET_ERROR', (response.data.message) ? response.data.message : JSON.stringify(
+          response.data.error))
+      }
     },
-    addPage ({
+    ADD_PAGE: async ({
       commit
-    }, page) {
-      commit('addPage', page)
+    }, page) => {
+      try {
+        const {
+          status,
+          data
+        } = await apiCaller.pages.add(page)
+        if (status === 201) {
+          commit('ADD_PAGE', data)
+        }
+      } catch ({
+        response
+      }) {
+        console.log(response)
+        commit('SET_ERROR', (response.data.message) ? response.data.message : JSON.stringify(
+          response.data.error))
+      }
+    },
+    SET_PAGES: async ({
+      commit
+    }) => {
+      try {
+        const {
+          status,
+          data
+        } = await apiCaller.pages.all()
+        if (status === 200) {
+          commit('SET_PAGES', data)
+        }
+      } catch ({
+        response
+      }) {
+        commit('SET_ERROR', (response.data.message) ? response.data.message : JSON.stringify(
+          response.data.error))
+      }
     }
   }
 }

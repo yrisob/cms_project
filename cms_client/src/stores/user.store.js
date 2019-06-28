@@ -66,8 +66,6 @@ const userStore = {
           status,
           data
         } = response
-        console.log('in try')
-        console.log(response)
         if (status === 200) {
           commit('ADD_USER', data)
           return true

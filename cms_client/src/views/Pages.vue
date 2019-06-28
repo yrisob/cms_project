@@ -10,7 +10,7 @@
       :items="pages"
       :actions="['delete', 'edit']"
       :editHref="editUrl"
-      @deleteAction="deletePage"
+      @deleteAction="DELETE_PAGE"
       @previewAction="previewAction"
     ></table-with-search>
     <br /><br />
@@ -22,12 +22,13 @@
       :createItemTitle="createTitle"
       :textFields="textFields"
       @visualize="createPage = $event"
-      @create="addPage"
+      @create="ADD_PAGE"
     ></create-item-component>
   </div>
 </template>
 
 <script>
+import dayjs from 'dayjs'
 import TableWithSearch from '../components/TableWithSearch'
 import CreateItemComponent from '../components/CreateItemComponent'
 import { mapGetters, mapActions } from 'vuex'
@@ -49,22 +50,26 @@ export default {
         text: 'Название',
         align: 'left',
         sortable: false,
-        value: 'name'
+        value: 'name',
+        convert: (data) => data
       },
       {
         text: 'Подпись',
         align: 'right',
-        value: 'title'
+        value: 'title',
+        convert: (data) => data
       },
       {
         text: 'Регистрация',
         align: 'right',
-        value: 'createdDate'
+        value: 'createdDate',
+        convert: (data) => dayjs(data).format('DD.MM.YYYY HH:mm')
       },
       {
         text: 'Изменения',
         align: 'right',
-        value: 'updatedDate'
+        value: 'updatedDate',
+        convert: (data) => dayjs(data).format('DD.MM.YYYY HH:mm')
       },
       {
         text: 'Действия',
@@ -90,13 +95,16 @@ export default {
       }
     ]
   }),
+  mounted () {
+    this.$store.dispatch('SET_PAGES')
+  },
   computed: {
     ...mapGetters({
-      pages: 'getPages'
+      pages: 'PAGES'
     })
   },
   methods: {
-    ...mapActions(['deletePage', 'addPage']),
+    ...mapActions(['DELETE_PAGE', 'ADD_PAGE']),
     showCreatePage (visualizate) {
       this.createPage = visualizate
     },
