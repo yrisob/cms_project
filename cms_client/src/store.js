@@ -4,6 +4,8 @@ import userStore from './stores/user.store'
 import pageStore from './stores/page.store'
 import authStore from './stores/auth.store'
 import errorStore from './stores/error.store'
+import configStore from './stores/config.store'
+import blockStore from './stores/block.store'
 
 Vue.use(Vuex)
 
@@ -12,6 +14,8 @@ export default new Vuex.Store({
     error: errorStore,
     user: userStore,
     page: pageStore,
-    auth: authStore
+    auth: authStore,
+    block: blockStore,
+    config: configStore
   }
 })
