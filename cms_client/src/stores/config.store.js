@@ -8,9 +8,12 @@ const configStore = {
   getters: {
     IMG_URL: (state) => {
       return state.imgUrl
+    },
+    BASE_URL: (state) => {
+      return apiCaller.config.baseURL
     }
   },
-  actions: {
+  mutations: {
     CLEAN_IMG: (state) => {
       state.imgUrl = ''
     },
@@ -18,16 +21,18 @@ const configStore = {
       state.imgUrl = imgUrl
     }
   },
-  mutations: {
+  actions: {
     ADD_IMG: async ({
       commit
     }, img) => {
       commit('CLEAN_IMG')
       try {
+        var formData = new FormData()
+        formData.append('file', img)
         const {
           data,
           status
-        } = await apiCaller.config.upload(img)
+        } = await apiCaller.config.upload(formData)
         if (status === 201) {
           commit('SET_IMG', data.imgUrl)
           return data.imgUrl

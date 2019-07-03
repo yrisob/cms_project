@@ -6,7 +6,7 @@
       :tableTitle="tableTitle"
       :searchTitle="titleSearch"
       :headers="headers"
-      :search="search"
+      :search="getSearchText"
       :items="blocks"
       :actions="['delete', 'edit']"
       :editHref="editUrl"
@@ -14,24 +14,27 @@
       @previewAction="previewAction"
     ></table-with-search>
     <br /><br />
-    <v-btn :to="" small>+ Добавить станицу</v-btn>
+    <v-btn @click="previewAction" small>Создать новый баннер</v-btn>
   </div>
 </template>
 
 <script>
 import TableWithSearch from '../components/TableWithSearch'
 import dayjs from 'dayjs'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   components: {
     TableWithSearch
   },
+  props: ['search'],
   data: () => ({
     tableTitle: 'Доступные баннеры',
     titleSearch: 'Найти баннер',
     createPage: false,
     editUrl: '/banner',
     createTitle: 'Создать новый баннер',
+    baseUrl: '',
     headers: [
       {
         text: 'Название',
@@ -52,7 +55,7 @@ export default {
         value: 'imgUrl',
         isImage: true,
         imgWidth: '40px',
-        convert: (data) => `${this.$store.state.config.baseUrl}/${data}`
+        convert: (data) => data
       },
       {
         text: 'Приоритет',
@@ -81,13 +84,36 @@ export default {
     ]
   }),
   mounted () {
+    const blocks = this.$store.getters.BLOCKS
 
+    if (!blocks || blocks.length === 0) {
+      this.$store.dispatch('SET_BLOCK')
+    }
   },
   computed: {
-
+    ...mapGetters({
+      blocks: 'BLOCKS'
+    }),
+    getSearchText: {
+      get () {
+        if (this.search) {
+          return '' + this.search
+        }
+        return ''
+      },
+      set (newValue) {
+        this.search = newValue
+      }
+    }
   },
   methods: {
-
+    ...mapActions(['DELETE_BLOCK']),
+    showCreatePage (visualizate) {
+      this.createPage = visualizate
+    },
+    previewAction (block) {
+      this.$router.push(`${this.editUrl}/${(block && block.id) ? block.id : 'new'}`)
+    }
   }
 }
 </script>

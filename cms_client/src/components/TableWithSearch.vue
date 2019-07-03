@@ -12,11 +12,16 @@
           hide-details
         ></v-text-field>
       </v-card-title>
-      <v-data-table :headers="headers" :items="items" :search="searchingString">
+      <v-data-table
+        :headers="headers"
+        :items="items"
+        item-key="id"
+        :search="searchingString"
+      >
         <template v-slot:items="props">
           <template v-for="(header, index) in headers">
             <td
-              :key="index"
+              v-bind:key="index + '-data'"
               v-if="!header.action"
               :class="index ? 'text-xs-right' : ''"
               @click="editItem(props.item)"
@@ -28,7 +33,7 @@
               }}
             </td>
             <td
-              :key="index"
+              v-bind:key="index + '-action'"
               v-if="header.action"
               :class="index ? 'text-xs-right' : ''"
             >

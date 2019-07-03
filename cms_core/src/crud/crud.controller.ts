@@ -69,27 +69,18 @@ export function CrudController(
       if (!validationResult) {
         return this.crudService.create(dto);
       } else {
-        throw new BadRequestException(
-          { error: validationResult },
-          'bad request',
-        );
+        throw new BadRequestException({ message: validationResult }, 'bad request');
       }
     }
 
     @Patch(':id')
     @UseGuards(updateGuard ? updateGuard : DefaultGuard)
-    async update(
-      @Param('id', new ParseIntPipe()) id,
-      @Body() dto,
-    ): Promise<any> {
+    async update(@Param('id', new ParseIntPipe()) id, @Body() dto): Promise<any> {
       const validationResult = validateClasses(new typeDto(), dto);
       if (!validationResult) {
         return this.crudService.update(id, dto);
       } else {
-        throw new BadRequestException(
-          { error: validationResult },
-          'bad request',
-        );
+        throw new BadRequestException({ message: validationResult }, 'bad request');
       }
     }
 

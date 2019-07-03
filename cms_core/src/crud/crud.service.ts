@@ -1,15 +1,5 @@
-import {
-  Type,
-  Injectable,
-  Inject,
-  BadRequestException,
-  NotFoundException,
-} from '@nestjs/common';
-import {
-  InjectRepository,
-  TypeOrmModule,
-  InjectConnection,
-} from '@nestjs/typeorm';
+import { Type, Injectable, Inject, BadRequestException, NotFoundException } from '@nestjs/common';
+import { InjectRepository, TypeOrmModule, InjectConnection } from '@nestjs/typeorm';
 import { getRepository, Connection, Repository } from 'typeorm';
 import { getEntityMadeOfDto } from '../utils/validate.class';
 
@@ -41,13 +31,13 @@ export function CrudService(typeEntity: Type<any>): Type<ICrudService> {
       const someEntity = new typeEntity();
       const creatableEntity = getEntityMadeOfDto(someEntity, dto);
       if (!creatableEntity) {
-        throw new BadRequestException('expected data for entity');
+        throw new BadRequestException({ message: 'expected data for entity' });
       } else {
         try {
           const result = await this.serviceRepository.save(creatableEntity);
           return result;
         } catch (e) {
-          throw new BadRequestException(e.message);
+          throw new BadRequestException({ message: e.message });
         }
       }
     }
@@ -63,12 +53,12 @@ export function CrudService(typeEntity: Type<any>): Type<ICrudService> {
     async update(id: number, dto: any): Promise<any> {
       let foundEntity = await this.serviceRepository.findOne(id);
       if (!foundEntity) {
-        throw new NotFoundException(`Entity with id=${id} not found`);
+        throw new NotFoundException({ message: `Entity with id=${id} not found` });
       } else {
         foundEntity = getEntityMadeOfDto(foundEntity, dto);
 
         if (!foundEntity) {
-          throw new BadRequestException('expected data for entity');
+          throw new BadRequestException({ message: 'expected data for entity' });
         } else {
           try {
             const savedEntity = await this.serviceRepository.save(foundEntity);
@@ -76,7 +66,7 @@ export function CrudService(typeEntity: Type<any>): Type<ICrudService> {
           } catch (e) {
             throw new BadRequestException({
               statusCode: 400,
-              error: e.message,
+              message: e.message,
             });
           }
         }
@@ -90,10 +80,10 @@ export function CrudService(typeEntity: Type<any>): Type<ICrudService> {
           const removedEntity = await this.serviceRepository.remove(itemForDel);
           return removedEntity;
         } catch (e) {
-          throw new BadRequestException(e.message);
+          throw new BadRequestException({ message: e.message });
         }
       } else {
-        throw new NotFoundException(`element with id=${id} not found`);
+        throw new NotFoundException({ message: `element with id=${id} not found` });
       }
       return;
     }

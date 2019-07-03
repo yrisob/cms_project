@@ -10,6 +10,7 @@ import Banners from './views/Banners.vue'
 import Page from './views/Page.vue'
 import Login from './views/Login.vue'
 import store from './store.js'
+import Banner from './views/Banner.vue'
 
 Vue.use(Router)
 
@@ -80,7 +81,21 @@ const router = new Router({
     component: Banners,
     meta: {
       conditionalRoute: true
-    }
+    },
+    props: route => ({
+      search: route.query.search
+    })
+  },
+  {
+    path: '/banner/:id',
+    name: 'banner',
+    component: Banner,
+    meta: {
+      conditionalRoute: true
+    },
+    props: (route) => ({
+      id: route.params.id
+    })
   },
   {
     path: '/page/:id',

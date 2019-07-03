@@ -31,9 +31,9 @@ export function getEntityMadeOfDto(entity: any, dto: any): any {
     return undefined;
   }
 
-  for (let i = 0; i < resultKey.length; i++) {
-    if (resultKey[i].toLowerCase() !== 'id') {
-      entity[resultKey[i]] = dto[resultKey[i]];
+  for (const key of resultKey) {
+    if (key.toLowerCase() !== 'id') {
+      entity[key] = dto[key];
     }
   }
 

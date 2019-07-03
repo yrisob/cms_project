@@ -1,9 +1,9 @@
 import axios from 'axios'
 
-const baseUrl = 'http://localhost:3000/'
+const BASEURL = 'http://localhost:3000/'
 
 const instance = axios.create({
-  baseURL: baseUrl,
+  baseURL: BASEURL,
   timeout: 10000,
   headers: {
     'Access-Control-Allow-Origin': '*'
@@ -12,9 +12,13 @@ const instance = axios.create({
 
 const apiCaller = {
   config: {
-    baseURL: baseUrl,
+    baseURL: BASEURL,
     upload: (img) => {
-      return instance.post('upload', img)
+      return instance.post('img', img, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      })
     }
   },
   auth: {
@@ -59,6 +63,9 @@ const apiCaller = {
     },
     delete: (id) => {
       return instance.delete(`block/${id}`)
+    },
+    update: (id, block) => {
+      return instance.patch(`block/${id}`, block)
     }
   },
 

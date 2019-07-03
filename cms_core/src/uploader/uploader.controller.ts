@@ -30,11 +30,11 @@ export class UploaderController {
       },
     }),
   )
-  uploadImg(@Param('id', new ParseIntPipe()) id, @UploadedFiles() file) {
+  uploadImg(@UploadedFiles() file) {
     return { imgUrl: `img/${file[0].path}` };
   }
 
-  @Get(':imgpath')
+  @Get('uploads/:imgpath')
   getPageImage(@Param('imgpath') imgpath, @Res() res) {
     return res.sendFile(imgpath, { root: 'uploads' });
   }
