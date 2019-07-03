@@ -22,7 +22,7 @@
           <template v-for="(header, index) in headers">
             <td
               v-bind:key="index + '-data'"
-              v-if="!header.action"
+              v-if="!header.action && !header.isImage"
               :class="index ? 'text-xs-right' : ''"
               @click="editItem(props.item)"
             >
@@ -33,8 +33,16 @@
               }}
             </td>
             <td
+              v-bind:key="index + '-data'"
+              v-if="!header.action && header.isImage"
+              :class="index ? 'text-xs-right' : ''"
+              @click="editItem(props.item)"
+            >
+              <v-img :src="getImage(props.item[header.value])"></v-img>
+            </td>
+            <td
               v-bind:key="index + '-action'"
-              v-if="header.action"
+              v-if="header.action && !header.isImage"
               :class="index ? 'text-xs-right' : ''"
             >
               <v-tooltip v-if="hasEditAction" top>
@@ -141,6 +149,13 @@ export default {
     }
   },
   methods: {
+    getImage (path) {
+      if (!path) {
+        return require('../assets/noimage.jpg')
+      } else {
+        return `${this.$store.getters.BASE_URL}${path}`
+      }
+    },
     setItemForDel (id) {
       this.idItemForDel = id
       this.dialog = true

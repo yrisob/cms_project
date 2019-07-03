@@ -59,7 +59,7 @@ export default {
         validateRule: 'required|min:20'
       },
       {
-        type: 'numeric',
+        type: 'number',
         propName: 'index',
         value: '',
         title: 'Приоритет',

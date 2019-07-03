@@ -44,7 +44,7 @@
         ></v-text-field>
 
         <v-text-field
-          v-if="textField.type === 'numeric'"
+          v-if="textField.type === 'number'"
           :key="index"
           v-model.number="textField.value"
           v-validate="textFields.validateRule"
@@ -144,7 +144,7 @@ export default {
         if (validator) {
           let item = {}
           for (const textField in this.textFields) {
-            item[textField.propName] = (textField.type !== 'numeric') ? textField.value : parseFloat(textField.value)
+            item[textField.propName] = (textField.type !== 'number') ? textField.value : parseFloat(textField.value)
           }
           for (let i = 0; i < this.textFields.length; i++) {
             item[this.textFields[i].propName] = this.textFields[i].value
