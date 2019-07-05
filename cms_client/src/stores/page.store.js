@@ -61,6 +61,51 @@ const pageStore = {
           response.data.error))
       }
     },
+    GET_PAGE_ID: async ({
+      commit
+    }, id) => {
+      try {
+        const {
+          data,
+          status
+        } = await apiCaller.pages.getById(id)
+        if (status === 200) {
+          commit('DELETE_PAGE', id)
+          commit('ADD_PAGE', data.page)
+          return data
+        }
+      } catch ({
+        response
+      }) {
+        commit('SET_ERROR', (response.data.message) ? response.data.message : JSON.stringify(
+          response.data.error))
+        return undefined
+      }
+    },
+    UPDATE_PAGE: async ({
+      commit
+    }, {
+        id,
+        pageInfo
+      }) => {
+      try {
+        const {
+          data,
+          status
+        } = await apiCaller.pages.update(id, pageInfo)
+        if (status === 200) {
+          commit('DELETE_PAGE', id)
+          commit('ADD_PAGE', data.page)
+          return true
+        }
+      } catch ({
+        response
+      }) {
+        commit('SET_ERROR', (response.data.message) ? response.data.message : JSON.stringify(
+          response.data.error))
+        return false
+      }
+    },
     SET_PAGES: async ({
       commit
     }) => {

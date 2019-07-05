@@ -47,7 +47,7 @@ export default {
         text: 'Описание',
         align: 'right',
         value: 'content',
-        convert: (data) => data
+        convert: (data) => `${data.substring(0, 97)}...`
       },
       {
         text: 'Изображение',

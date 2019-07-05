@@ -17,6 +17,7 @@ import { validateClasses } from '../utils/validate.class';
 import { DefaultGuard } from './default_settings/default.guard';
 
 export interface ICrudHost {
+  getService(): ICrudService;
   create(dto: any): Promise<any>;
   findAll(): Promise<any>;
   findById(id: number): Promise<any>;

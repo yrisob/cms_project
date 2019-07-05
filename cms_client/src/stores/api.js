@@ -49,6 +49,12 @@ const apiCaller = {
     },
     delete: (id) => {
       return instance.delete(`page/${id}`)
+    },
+    getById: (id) => {
+      return instance.get(`page/${id}`)
+    },
+    update: (id, pageInfo) => {
+      return instance.patch(`page/${id}`, pageInfo)
     }
   },
   blocks: {
