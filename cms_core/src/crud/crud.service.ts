@@ -1,6 +1,6 @@
-import { Type, Injectable, Inject, BadRequestException, NotFoundException } from '@nestjs/common';
-import { InjectRepository, TypeOrmModule, InjectConnection } from '@nestjs/typeorm';
-import { getRepository, Connection, Repository } from 'typeorm';
+import { Type, BadRequestException, NotFoundException } from '@nestjs/common';
+import { InjectConnection } from '@nestjs/typeorm';
+import { Connection, Repository } from 'typeorm';
 import { getEntityMadeOfDto } from '../utils/validate.class';
 
 export interface ICrudService {
@@ -18,7 +18,7 @@ export function CrudService(typeEntity: Type<any>): Type<ICrudService> {
 
     constructor(
       @InjectConnection('default')
-      private readonly connection: Connection,
+      connection: Connection,
     ) {
       this.serviceRepository = connection.getRepository(typeEntity);
     }

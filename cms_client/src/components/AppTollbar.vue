@@ -1,7 +1,7 @@
 <template>
   <v-toolbar fixed dark class="toolbar_footer">
-    <!-- <v-toolbar-side-icon></v-toolbar-side-icon> -->
-    <v-toolbar-title>cms_admin</v-toolbar-title>
+    <img :src="require('../assets/logo_64.jpg')" class="logo" />
+    <v-toolbar-title>ITHeads</v-toolbar-title>
     <v-spacer></v-spacer>
     <v-toolbar-items class="hidden-sm-and-down">
       <v-btn flat @click="changeUser()">{{ getChangeUserName }}</v-btn>
