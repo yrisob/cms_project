@@ -75,6 +75,21 @@ const apiCaller = {
     }
   },
 
+  menu: {
+    all: () => {
+      return instance.get('menu')
+    },
+    add: (data) => {
+      return instance.post(data)
+    },
+    update: (id, menu) => {
+      return instance.patch(`menu/${id}`, menu)
+    },
+    delete: (id) => {
+      return instance.delete(`menu/${id}`)
+    }
+  },
+
   setAuthorization: (token) => {
     instance.defaults.headers.common = {
       'Authorization': `Bearer ${token}`

@@ -1,10 +1,10 @@
-import * as _ from 'lodash';
-import { validate, IsInt, IsString, Validator } from 'class-validator';
+import * as lodash from 'lodash';
+import { Validator } from 'class-validator';
 
 export function validateClasses(dto: any, enterObject: any): any {
   const dtoKeys = Object.getOwnPropertyNames(dto);
   const enterObjectKeys = Object.getOwnPropertyNames(enterObject);
-  const resultKey = _.intersection(dtoKeys, enterObjectKeys);
+  const resultKey = lodash.intersection(dtoKeys, enterObjectKeys);
 
   for (const key of resultKey) {
     dto[key] = enterObject[key];
@@ -14,7 +14,7 @@ export function validateClasses(dto: any, enterObject: any): any {
 
   const errors = validator.validateSync(dto);
   if (errors.length > 0) {
-    return _.map(errors, n => {
+    return lodash.map(errors, n => {
       return n.constraints;
     });
   } else {
@@ -25,7 +25,7 @@ export function validateClasses(dto: any, enterObject: any): any {
 export function getEntityMadeOfDto(entity: any, dto: any): any {
   const dtoKeys = Object.getOwnPropertyNames(dto);
   const entityObjectKeys = Object.getOwnPropertyNames(entity);
-  const resultKey = _.intersection(dtoKeys, entityObjectKeys);
+  const resultKey = lodash.intersection(dtoKeys, entityObjectKeys);
 
   if (!resultKey && resultKey.length === 0) {
     return undefined;

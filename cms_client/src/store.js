@@ -6,6 +6,7 @@ import authStore from './stores/auth.store'
 import errorStore from './stores/error.store'
 import configStore from './stores/config.store'
 import blockStore from './stores/block.store'
+import menuStore from './stores/menu.store'
 
 Vue.use(Vuex)
 
@@ -16,6 +17,7 @@ export default new Vuex.Store({
     page: pageStore,
     auth: authStore,
     block: blockStore,
-    config: configStore
+    config: configStore,
+    menu: menuStore
   }
 })

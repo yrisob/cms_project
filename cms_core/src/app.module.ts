@@ -11,6 +11,8 @@ import { PagesController } from './pages/pages.controller';
 import { BlocksService } from './blocks/blocks.service';
 import { PageInfoService } from './page-info/page-info.service';
 import { UploaderController } from './uploader/uploader.controller';
+import { MenuController } from './menu/menu.controller';
+import { MenuService } from './menu/menu.service';
 @Module({
   imports: [
     AuthModule,
@@ -20,8 +22,8 @@ import { UploaderController } from './uploader/uploader.controller';
       dest: './uploads',
     }),
   ],
-  controllers: [AppController, PagesController, BlocksController, UploaderController],
-  providers: [AppService, PagesService, BlocksService, PageInfoService],
+  controllers: [AppController, PagesController, BlocksController, UploaderController, MenuController],
+  providers: [AppService, PagesService, BlocksService, PageInfoService, MenuService],
 })
 export class AppModule {
   constructor(private readonly connection: Connection) {}
