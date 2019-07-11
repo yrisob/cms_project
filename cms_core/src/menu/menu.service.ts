@@ -80,11 +80,12 @@ export class MenuService implements ICrudService {
   async delete(id: number): Promise<any> {
     try {
       const deletedEntity = await this.serviceRepository.findOne(id);
-      this.conn
+      await this.conn
         .createQueryBuilder()
         .delete()
         .from('menu_closure')
         .where('id_ancestor = :id', { id })
+        .orWhere('id_descendant = :id', { id })
         .execute();
       await this.serviceRepository.remove(deletedEntity);
       return deletedEntity;

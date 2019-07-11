@@ -80,7 +80,7 @@ const apiCaller = {
       return instance.get('menu')
     },
     add: (data) => {
-      return instance.post(data)
+      return instance.post('menu', data)
     },
     update: (id, menu) => {
       return instance.patch(`menu/${id}`, menu)
