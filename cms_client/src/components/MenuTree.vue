@@ -7,6 +7,7 @@
         :menuItem="menuItem"
         :key="`item${menuItem.id}`"
         :parentId="parentId"
+        @showDeleteWarning="showWarning()"
       ></menu-item>
       <menu-tree
         v-if="menuItem.children && menuItem.children.length > 0"
@@ -22,6 +23,7 @@
       :selectItems="pages"
       :menuItem="{}"
       :parentId="parentId"
+      @showDeleteWarning="showWarning()"
     ></menu-item>
   </div>
 </template>
@@ -35,6 +37,11 @@ export default {
   name: 'menu-tree',
   props: ['menuItems', 'pages', 'level', 'parentId'],
   data: () => ({
-  })
+  }),
+  methods: {
+    showWarning () {
+      this.$emit('showDeleteWarning')
+    }
+  }
 }
 </script>

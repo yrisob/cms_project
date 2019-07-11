@@ -2,7 +2,27 @@
   <div>
     <h2>Состав меню</h2>
     <br />
-    <menu-tree :menuItems="menu" :pages="pages" :level="0"></menu-tree>
+    <menu-tree
+      :menuItems="menu"
+      :pages="pages"
+      :level="0"
+      @showDeleteWarning="dialog = true"
+    ></menu-tree>
+    <v-dialog v-model="dialog" persistent max-width="30%">
+      <v-card>
+        <v-card-title class="headline"
+          >Невозможно удалить пункт меню с вложением.</v-card-title
+        >
+        <v-card-text
+          >Удаление пунктов меню с вложением возможно только после очистки всех
+          вложенных пунктов.</v-card-text
+        >
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn color="black" flat @click="dialog = false">Понятно</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </div>
 </template>
 
@@ -15,6 +35,7 @@ export default {
     MenuTree
   },
   data: () => ({
+    dialog: false
   }),
   mounted () {
     const menu = this.$store.state.menu.menu

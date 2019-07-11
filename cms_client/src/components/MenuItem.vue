@@ -8,12 +8,12 @@
       "
     >
       <v-text-field
-        :prepend-icon="!addSunMenu ? 'add' : 'remove'"
+        :prepend-icon="!addSubmenu ? 'add' : 'remove'"
         class="caption"
         v-model="menuItem.name"
         label="Название меню"
         solo
-        @click:prepend="addSunMenu = !!menuItem.id ? !addSunMenu : false"
+        @click:prepend="addSubmenu = !!menuItem.id ? !addSubmenu : false"
         @input="changeFields"
       ></v-text-field>
     </v-flex>
@@ -25,18 +25,21 @@
         item-text="name"
         item-value="id"
         v-model="menuItem.pageId"
-        :append-outer-icon="readonly && !!menuItem.id ? 'backspace' : 'save'"
+        :append-outer-icon="
+          isNotChanged && !!menuItem.id ? 'backspace' : 'save'
+        "
         solo
         @click:append-outer="transformMenu"
         @input="changeFields"
       ></v-select>
     </v-flex>
     <menu-item
-      v-if="addSunMenu"
+      v-if="addSubmenu"
       :level="level + 1"
       :selectItems="selectItems"
       :menuItem="{}"
       :parentId="menuItem.id"
+      @closeSubMenu="addSubmenu = false"
     ></menu-item>
   </v-layout>
 </template>
@@ -46,8 +49,8 @@ export default {
   name: 'menu-item',
   props: ['level', 'menuItem', 'selectItems', 'parentId'],
   data: () => ({
-    readonly: true,
-    addSunMenu: false,
+    isNotChanged: true,
+    addSubmenu: false,
     defaultMenuItemValue: {}
   }),
   mounted () {
@@ -56,25 +59,29 @@ export default {
 
   methods: {
     changeFields () {
-      console.log('change fields')
       if (this.menuItem.name !== this.defaultMenuItemValue.name || this.menuItem.pageId !== this.defaultMenuItemValue.pageId) {
-        this.readonly = false
+        this.isNotChanged = false
       } else {
-        this.readonly = true
+        this.isNotChanged = true
       }
     },
     async transformMenu () {
-      if (this.readonly && !!this.menuItem.id) {
-        this.$store.dispatch('DELETE', this.menuItem.id)
+      if (this.isNotChanged && !!this.menuItem.id) {
+        if (this.menuItem.children && this.menuItem.children.length > 0) {
+          this.$emit('showDeleteWarning')
+        } else {
+          this.$store.dispatch('DELETE', this.menuItem.id)
+        }
       } else {
         this.menuItem.parentId = this.parentId
         if (this.menuItem.id) {
-          this.readonly = await this.$store.dispatch('UPDATE', { id: this.menuItem.id, menuItem: this.menuItem })
+          this.isNotChanged = await this.$store.dispatch('UPDATE', { id: this.menuItem.id, menuItem: this.menuItem })
         } else {
-          this.readonly = await this.$store.dispatch('ADD', this.menuItem)
+          this.isNotChanged = await this.$store.dispatch('ADD', this.menuItem)
+          this.$emit('closeSubMenu')
         }
-        if (this.readonly) {
-          this.addSunMenu = false
+        if (this.isNotChanged) {
+          this.addSubmenu = false
         }
       }
     }
