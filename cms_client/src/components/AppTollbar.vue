@@ -1,5 +1,5 @@
 <template>
-  <v-toolbar fixed dark class="toolbar_footer">
+  <v-toolbar fixed dark color="primary" class="toolbar_footer">
     <img :src="require('../assets/logo_64.jpg')" class="logo" />
     <v-toolbar-title>ITHeads</v-toolbar-title>
     <v-spacer></v-spacer>

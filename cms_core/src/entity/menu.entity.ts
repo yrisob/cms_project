@@ -10,6 +10,9 @@ export class Menu extends VersionBase {
   @Column({ type: 'int', nullable: true })
   pageId?: number | null;
 
+  @Column({ type: 'int', nullable: false, default: 10 })
+  orderNumber: number | null;
+
   @TreeChildren()
   children: Menu[];
 
@@ -21,5 +24,6 @@ export class Menu extends VersionBase {
     this.name = '';
     this.pageId = null;
     this.parent = null;
+    this.orderNumber = null;
   }
 }

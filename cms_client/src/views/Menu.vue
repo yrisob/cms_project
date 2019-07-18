@@ -19,7 +19,9 @@
         >
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="black" flat @click="dialog = false">Понятно</v-btn>
+          <v-btn dark color="primary" flat @click="dialog = false"
+            >Понятно</v-btn
+          >
         </v-card-actions>
       </v-card>
     </v-dialog>

@@ -5,6 +5,7 @@ import { MenuDTO } from '../dto/menu.dto';
 import { TreeRepository, Connection } from 'typeorm';
 import { getEntityMadeOfDto } from '../utils/validate.class';
 import { InjectRepository, InjectConnection } from '@nestjs/typeorm';
+import { IsNumber } from 'class-validator';
 
 @Injectable()
 export class MenuService implements ICrudService {

@@ -21,13 +21,15 @@ export class PagesController extends CrudController(PagesService, 'page', PageDT
   @Get(':id')
   async findById(@Param('id', new ParseIntPipe()) id): Promise<any> {
     let pageInfo: PageInfo = await this.pageInfoService.findByPageId(id);
-    pageInfo.page = await this.getService().findById(id);
+
     if (!pageInfo) {
       const page: Page = await this.getService().findById(id);
       if (page) {
         pageInfo = new PageInfo();
         pageInfo.page = page;
       }
+    } else {
+      pageInfo.page = await this.getService().findById(id);
     }
     return pageInfo;
   }

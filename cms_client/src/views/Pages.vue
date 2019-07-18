@@ -14,7 +14,12 @@
       @previewAction="previewAction"
     ></table-with-search>
     <br /><br />
-    <v-btn v-if="!createPage" @click="showCreatePage(true)" small
+    <v-btn
+      v-if="!createPage"
+      @click="showCreatePage(true)"
+      small
+      dark
+      color="primary"
       >+ Добавить станицу</v-btn
     >
     <create-item-component

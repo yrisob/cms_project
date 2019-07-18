@@ -1,0 +1,11 @@
+.theme--dark.v-navigation-drawer {
+    background-color: #1e1e1e;
+}
+
+.header-logo>h2 {
+    color: #33b225;
+}
+
+.v-list__group__items.v-list__tile__title.flex.offset-md3 {
+    margin-left: 10%;
+}

@@ -13,7 +13,12 @@
     ></table-with-search>
     <div>
       <br /><br />
-      <v-btn v-if="!createUser" @click="showCreateUserForm(true)" small
+      <v-btn
+        v-if="!createUser"
+        @click="showCreateUserForm(true)"
+        small
+        dark
+        color="primary"
         >+ Добавить пользователя</v-btn
       >
       <create-item-component

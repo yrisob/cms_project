@@ -14,7 +14,9 @@
       @previewAction="previewAction"
     ></table-with-search>
     <br /><br />
-    <v-btn @click="previewAction" small>Создать новый баннер</v-btn>
+    <v-btn @click="previewAction" dark color="primary" small
+      >Создать новый баннер</v-btn
+    >
   </div>
 </template>
 

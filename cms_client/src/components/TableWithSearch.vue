@@ -17,6 +17,7 @@
         :items="items"
         item-key="id"
         :search="searchingString"
+        :total-items="totlaCount"
       >
         <template v-slot:items="props">
           <template v-for="(header, index) in headers">
@@ -95,7 +96,9 @@
         >
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="black" flat @click="dialog = false">Отменить</v-btn>
+          <v-btn dark color="primary" flat @click="dialog = false"
+            >Отменить</v-btn
+          >
           <v-btn color="red darken-1" flat @click="deleteItem()"
             >Подтвердить</v-btn
           >
@@ -120,6 +123,7 @@ export default {
     searchingText: '',
     isSearchTextChanged: false,
     dialog: false,
+    totlaCount: 25,
     idItemForDel: null
   }),
   computed: {

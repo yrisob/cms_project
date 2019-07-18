@@ -89,7 +89,7 @@
           </v-hover>
         </v-layout>
       </template>
-      <v-btn small @click="save()" dark>Создать</v-btn>
+      <v-btn small @click="save()" dark color="primary">Создать</v-btn>
       <v-btn small @click="cancel()">Отменить</v-btn>
     </form>
   </div>
