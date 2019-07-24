@@ -16,9 +16,14 @@ import { UserService } from './user.service';
 import { IUser } from '../models/interfaces/iuser.interface';
 import { CrudController } from '../crud/crud.controller';
 import { UserDTO } from '../dto/user.dto';
+import { AuthGuard } from '@nestjs/passport';
 
 @Controller('user')
-export class UserController extends CrudController(UserService, 'user', UserDTO) {}
+export class UserController extends CrudController(UserService, 'user', UserDTO, {
+  createGuard: AuthGuard('jwt'),
+  updateGuard: AuthGuard('jwt'),
+  deleteGuard: AuthGuard('jwt'),
+}) {}
 //   constructor(private readonly userService: UserService) {}
 
 //   @Get()

@@ -12,8 +12,8 @@ import { PageInfoDTO } from '../dto/pageInfo.dto';
 
 @Controller('page')
 export class PagesController extends CrudController(PagesService, 'page', PageDTO, {
-  // createGuard: AuthGuard('jwt'),
-  // updateGuard: AuthGuard('jwt'),
+  createGuard: AuthGuard('jwt'),
+  updateGuard: AuthGuard('jwt'),
   deleteGuard: AuthGuard('jwt'),
 }) {
   @Inject(PageInfoService) readonly pageInfoService;
