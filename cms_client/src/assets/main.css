@@ -1,3 +1,5 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,700);
+
 .container-after-toolbar {
     margin-top: 64px;
 }
@@ -93,4 +95,51 @@ h2 {
     align-items: center;
     justify-content: center;
     position: absolute;
+}
+
+.ql-snow .ql-editor * {
+    /* I know I could write "margin: 0; padding: 0;". But that's not performant. */
+    font-family: 'Open Sans';
+    line-height: 170%;
+    color: #444;
+}
+
+.ql-snow .ql-editor p,
+h1,
+h2 {
+    margin: 0;
+    padding: 0;
+}
+
+.ql-snow .ql-editor h2 {
+    margin-top: 20px;
+}
+
+.ql-snow .ql-editor h4 {
+    margin-bottom: 20px;
+}
+
+@media only screen and (max-width: 1000px) {
+
+    /* For tablets: */
+    .ql-snow .ql-editort {
+        margin: 0 10% 30px 10%;
+        width: 80%;
+        max-width: 800px;
+        padding-left: 0px;
+        border: 0;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+
+    /* For mobile phones: */
+    .ql-snow .ql-editor {
+        margin: 0 5% 30px 5%;
+        width: 90%;
+    }
+
+    .wrapper {
+        padding: 5%;
+    }
 }

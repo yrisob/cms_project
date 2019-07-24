@@ -23,7 +23,7 @@
         </template>
 
         <v-list-tile
-          v-for="submenuItem in menuItem.children"
+          v-for="submenuItem in orderedChildren(menuItem)"
           :key="submenuItem.id"
           :to="'/' + submenuItem.pageId"
         >
@@ -46,6 +46,11 @@ export default {
   computed: {
     orderMenu: function () {
       return _.orderBy(this.menu, 'orderNumber')
+    }
+  },
+  methods: {
+    orderedChildren (menuItem) {
+      return _.orderBy(menuItem.children, 'orderNumber')
     }
   }
 }

@@ -9,7 +9,7 @@ export class PageInfo extends VersionBase {
   @JoinColumn()
   page: Page;
 
-  @Column({ type: 'text' })
+  @Column({ type: 'longtext' })
   content: string;
 
   @Column({ type: 'int' })

@@ -63,8 +63,6 @@ const pageStore = {
           status
         } = await apiCaller.pages.getById(id)
         if (status === 200) {
-          commit('DELETE_PAGE', id)
-          commit('ADD_PAGE', data.page)
           return data
         }
       } catch ({

@@ -2,9 +2,7 @@
   <v-app>
     <app-menu></app-menu>
     <main style="padding: 0px 0px 0px 300px;">
-      <v-container>
-        <router-view></router-view>
-      </v-container>
+      <router-view></router-view>
     </main>
   </v-app>
 </template>

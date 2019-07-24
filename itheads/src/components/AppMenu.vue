@@ -35,7 +35,9 @@ export default {
   data: () => ({
   }),
   mounted () {
-    this.$store.dispatch('SET_MENU')
+    if (this.$store.state.menu.menu.length === 0) {
+      this.$store.dispatch('SET_MENU')
+    }
   },
   computed: {
     ...mapState({
