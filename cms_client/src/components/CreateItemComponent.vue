@@ -5,7 +5,7 @@
     <form>
       <template v-for="(textField, index) in textFields">
         <v-text-field
-          v-if="textField.type === 'text'"
+          v-if="textField.type === 'text' || textField.type === 'email'"
           :key="index"
           v-model="textField.value"
           v-validate="textField.validateRule"

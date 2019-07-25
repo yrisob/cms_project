@@ -36,7 +36,7 @@
 import dayjs from 'dayjs'
 import TableWithSearch from '../components/TableWithSearch'
 import CreateItemComponent from '../components/CreateItemComponent'
-import { mapGetters, mapActions } from 'vuex'
+import { mapActions, mapState } from 'vuex'
 
 export default {
   props: ['search'],
@@ -120,8 +120,8 @@ export default {
     this.$store.dispatch('GET_USERS')
   },
   computed: {
-    ...mapGetters({
-      users: 'USERS'
+    ...mapState({
+      users: state => state.user.users
     }),
     createUser: {
       get () {

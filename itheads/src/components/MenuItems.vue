@@ -35,6 +35,18 @@
         </v-list-tile>
       </v-list-group>
     </template>
+    <v-list-tile @click="mailto">
+      <v-list-icon>
+        <v-icon>email</v-icon>
+      </v-list-icon>
+      <v-list-tile-title>&nbsp;&nbsp;Напишите нам письмо</v-list-tile-title>
+    </v-list-tile>
+    <v-list-tile @click="sendToTelegram">
+      <v-list-icon>
+        <v-icon>send</v-icon>
+      </v-list-icon>
+      <v-list-tile-title>&nbsp;&nbsp;Написать нам в telegram</v-list-tile-title>
+    </v-list-tile>
   </v-list>
 </template>
 
@@ -51,6 +63,12 @@ export default {
   methods: {
     orderedChildren (menuItem) {
       return _.orderBy(menuItem.children, 'orderNumber')
+    },
+    mailto () {
+      window.location.href = 'mailto:yrisob@gmail.com'
+    },
+    sendToTelegram () {
+      window.open('https://tg.sk8er.name/yrisob', '_blank')
     }
   }
 }

@@ -66,7 +66,7 @@ const userStore = {
           status,
           data
         } = response
-        if (status === 200) {
+        if (status === 201) {
           commit('ADD_USER', data)
           return true
         }
