@@ -12,7 +12,7 @@ import {
 } from '@nestjs/common';
 import { diskStorage } from 'multer';
 
-@Controller('img')
+@Controller('api/img')
 export class UploaderController {
   @Post()
   // @UseGuards(AuthGuard('jwt'))

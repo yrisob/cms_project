@@ -5,7 +5,6 @@ import { MenuDTO } from '../dto/menu.dto';
 import { Menu } from '../entity/menu.entity';
 import { AuthGuard } from '@nestjs/passport';
 
-@Controller('menu')
 export class MenuController extends CrudController(MenuService, 'menu', MenuDTO, {
   createGuard: AuthGuard('jwt'),
   updateGuard: AuthGuard('jwt'),

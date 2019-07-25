@@ -11,7 +11,7 @@ import { AuthService } from './auth.service';
 import { LoginRequest } from '../models/login-request';
 import { IUser } from '../models/interfaces/iuser.interface';
 
-@Controller('auth')
+@Controller('api/auth')
 export class AuthController {
   constructor(
     private readonly usersService: UserService,

@@ -10,7 +10,6 @@ import { Page } from '../entity/page.entity';
 import { validateClasses } from '../utils/validate.class';
 import { PageInfoDTO } from '../dto/pageInfo.dto';
 
-@Controller('page')
 export class PagesController extends CrudController(PagesService, 'page', PageDTO, {
   createGuard: AuthGuard('jwt'),
   updateGuard: AuthGuard('jwt'),

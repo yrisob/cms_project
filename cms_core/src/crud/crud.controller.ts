@@ -43,7 +43,7 @@ export function CrudController(
     deleteGuard?: any;
   } = {},
 ): Type<ICrudHost> {
-  @Controller(prefix)
+  @Controller(`api/${prefix}`)
   class CrudControllerHost implements ICrudHost {
     @Inject(service) readonly crudService;
 

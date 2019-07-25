@@ -7,13 +7,13 @@
     "database": "cms_project",
     "logging": false,
     "entities": [
-        "build/entity/**/*.entity{.ts,.js}"
+        "build/entity/**/*.entity{.ts,.js}", "src/entity/**/*.entity{.ts,.js}"
     ],
     "migrations": [
-        "build/migration/**/*{.ts,.js}"
+        "build/migration/**/*{.ts,.js}", "src/migration/**/*{.ts,.js}"
     ],
     "subscribers": [
-        "build/subscriber/**/*{.ts,.js}"
+        "build/subscriber/**/*{.ts,.js}", "src/subscriber/**/*{.ts,.js}"
     ],
     "cli": {
         "entitiesDir": "src/entity",
