@@ -25,13 +25,7 @@ export class AuthService {
   }
 
   createToken(user: User) {
-    // tslint:disable-next-line:no-console
-    console.log('get the expiration');
     const expiresIn = Config.expiresIn;
-    // tslint:disable-next-line:no-console
-    console.log('sign the token');
-    // tslint:disable-next-line:no-console
-    console.log(user);
 
     const accessToken = jwt.sign(
       {
@@ -43,10 +37,7 @@ export class AuthService {
       Config.jwtSecretKey,
       { expiresIn },
     );
-    // tslint:disable-next-line:no-console
-    console.log('return the token');
-    // tslint:disable-next-line:no-console
-    console.log(accessToken);
+
     return {
       expiresIn,
       accessToken,
