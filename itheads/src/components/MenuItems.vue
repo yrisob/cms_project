@@ -65,10 +65,10 @@ export default {
       return _.orderBy(menuItem.children, 'orderNumber')
     },
     mailto () {
-      window.location.href = 'mailto:yrisob@gmail.com'
+      window.location.href = 'mailto:info@itheads.net'
     },
     sendToTelegram () {
-      window.open('https://tg.sk8er.name/yrisob', '_blank')
+      window.open('https://tg.sk8er.name/itheadsnet', '_blank')
     }
   }
 }
