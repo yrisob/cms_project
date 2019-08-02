@@ -7,7 +7,7 @@
     fixed
     dark
   >
-    <v-list class="container-after-toolbar">
+    <v-list class="container-after-toolbar" :to="'/'">
       <v-layout align-center column justify-center class="header-logo">
         <h2 class="display-3 font-weight-black mb-2" dark>
           &gt;&rfloor;&lfloor;&lt;
