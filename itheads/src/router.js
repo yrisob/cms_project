@@ -20,7 +20,10 @@ const router = new Router({
 
   }, {
     path: ''
-  }]
+  }],
+  scrollBehavior (to, from, savedPosition) {
+    return { x: 0, y: 0 }
+  }
 })
 
 router.beforeEach(async (to, from, next) => {
