@@ -31,7 +31,7 @@
       "@types/lodash": "^4.14.123",
       "class-transformer": "^0.2.0",
       "class-validator": "^0.9.1",
-      "jsonwebtoken": "^8.5.0",
+      "jsonwebtoken": "^9.0.0",
       "lodash": "^4.17.11",
       "multer": "^1.4.1",
       "mysql": "^2.14.1",
